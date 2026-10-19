@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->id();
+            $table->id('purchase_number')->primary();
+            $table->date('date_of_purchase');
+            $table->number('customer_id');
+            $table->number('company_id');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('customer_id')->on('customers')->onDelete('cascade');
+            $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
         });
     }
 
